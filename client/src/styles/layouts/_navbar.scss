@@ -1,0 +1,59 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 45px;
+    @include defaultMargin;
+
+    @include mediumScreen {
+        padding-top: 30px;
+        @include mdMargin;
+    }
+
+    @include smallScreen {
+        padding-top: 20px;
+        @include smMargin;
+    }
+
+    img {
+        height: 68px;
+
+        @include smallScreen {
+            height: 46px;
+        }
+    }
+
+    nav {
+        ul {
+            display: flex;
+            flex-direction: row;
+            list-style: none;
+            gap: 57px;
+
+            @include smallScreen {
+                gap: 26px;
+            }
+
+            a {
+                font-size: 24px;
+                color: $primary_color;
+                text-decoration: none;
+                text-transform: capitalize;
+
+                @include mediumScreen {
+                    font-size: 18px;
+                }
+
+                @include smallScreen {
+                    font-size: 12px;
+                }
+            }
+
+            .active {
+                border-bottom: 1px $primary_color solid;
+            }
+        }
+
+    }
+
+}

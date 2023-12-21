@@ -1,0 +1,55 @@
+.error404 {
+    @include flexCenter;
+    flex-direction: column;
+    gap:  139px;
+    margin: 90px 0;
+    color: $primary-color;
+    text-align: center;
+    @include mediumScreen {
+        gap: 126px;
+    }
+    @include smallScreen {
+        gap: 113px;
+    }
+
+    h1 {
+        font-size: 288px;
+        font-weight: 700;
+
+        @include mediumScreen {
+            font-size: 200px;
+        }
+
+        @include smallScreen {
+            font-size: 96px;
+        }
+    }
+
+    p {
+        font-size: 36px;
+        font-weight: 500;
+
+        @include mediumScreen {
+            font-size: 24px;
+        }
+
+        @include smallScreen {
+            font-size: 18px;
+        }
+    }
+
+    a {
+        font-size: 18px;
+        font-weight: 500;
+        color: $primary-color;
+
+        @include mediumScreen {
+            font-size: 16px;
+        }
+
+        @include smallScreen {
+            font-size: 14px;
+        }
+
+    }
+}

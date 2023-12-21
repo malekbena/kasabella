@@ -1,0 +1,49 @@
+.banner {
+    position: relative;
+    border-radius: 25px;
+    overflow: hidden;
+    height: 223px;
+
+    @include smallScreen {
+        height: 111px;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &_text {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        @include flexCenter;
+        background-color: rgba($color: #000000, $alpha: 0.3);
+
+        @include smallScreen {
+            justify-content: left;
+        }
+
+        h2 {
+            font-size: 48px;
+            font-weight: 500;
+            color: $white_color;
+            margin: 0;
+            padding: 0;
+
+            @include mediumScreen {
+                font-size: 36px;
+            }
+            
+            @include smallScreen {
+                font-size: 24px;
+                margin-left: 16px;
+            }
+
+        }
+    }
+
+}

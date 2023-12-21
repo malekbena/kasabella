@@ -1,0 +1,19 @@
+.layout {
+    @include smallScreen {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+}
+
+main {
+    @include defaultMargin;
+    padding: 50px 0;
+    @include smallScreen {
+        padding: 20px 0;
+        @include smMargin;
+    }
+    @include mediumScreen {
+        @include mdMargin;
+    }
+}

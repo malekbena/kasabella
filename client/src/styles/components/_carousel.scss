@@ -1,0 +1,61 @@
+.carousel {
+    overflow: hidden;
+    border-radius: 25px;
+    position: relative;
+    height: 415px;
+
+    @include mediumScreen {
+        height: 355px;
+    }
+
+    @include smallScreen {
+        height: 255px;
+    }
+    .cover {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        height: 80px;
+        @include mediumScreen {
+            height: 60px;
+        }
+        @include smallScreen {
+            height: 24px;
+        }
+        img {
+            height: 100%;
+        }
+        
+    }
+    #carouselRight {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        z-index: 1;
+        padding: 0 25px;
+    }
+    #carouselLeft {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        z-index: 1;
+        padding: 0 25px;
+    }
+    .carousel_count {
+        position: absolute;
+        bottom: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 500;
+    }
+}

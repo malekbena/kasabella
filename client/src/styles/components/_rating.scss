@@ -1,0 +1,28 @@
+.rating {
+    gap: 10px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+    
+    @include smallScreen {
+        margin-top: 0;
+        gap: 5px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .innactive_star {
+        color: $secondary_color;
+    }
+
+    .fa-star {
+        font-size: 24px;
+
+        @include mediumScreen {
+            font-size: 20px;
+        }
+        @include smallScreen {
+            font-size: 16px;
+        }
+    }
+}

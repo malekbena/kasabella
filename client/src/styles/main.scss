@@ -1,0 +1,20 @@
+@import './base/_typo';
+@import './utils/_variables';
+@import './utils/_mixins';
+@import './layouts/layout';
+@import './layouts/_navbar';
+@import './layouts/_footer';
+@import './components/_banner';
+@import './components/_cards';
+@import './components/_collapse';
+@import './components/carousel';
+@import './components/_tag';
+@import './components/_rating';
+@import './pages/about';
+@import './pages/error404';
+@import './pages/accomodation';
+
+html, body, * {
+    margin: 0;
+    padding: 0;
+}

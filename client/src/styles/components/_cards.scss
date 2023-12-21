@@ -1,0 +1,64 @@
+.cards {
+    background-color: $bg-primary;
+    padding: 56px 50px 43px 50px;
+    border-radius: 25px;
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+
+    @include mediumScreen {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    @include smallScreen {
+        display: flex;
+        flex-direction: column;
+        background-color: $white-color;
+        padding: 0;
+    }
+
+    article {
+        border-radius: 10px;
+        overflow: hidden;
+        height: 340px;
+        position: relative;
+
+        .card_overlay {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(255, 96, 96, 0.5) 50%, rgba(0, 0, 0, .5) 100%);
+            opacity: 0;
+            transition: all .3s ease-in-out;
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .card_text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 40%;
+            z-index: 10;
+
+            p {
+                text-decoration: none;
+                color: $white_color;
+                font-size: 18px;
+                font-weight: 500;
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+    }
+}

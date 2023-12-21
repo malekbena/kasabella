@@ -1,0 +1,37 @@
+footer {
+    background-color: $bg_secondary;
+    @include flexCenter;
+    flex-direction: column;
+    color: $white_color;
+    padding: 66px 0 29px 0;
+    gap: 28px;
+    width: 100%;
+    
+    @include mediumScreen {
+        gap: 20px;
+    }
+    
+    @include smallScreen {
+        gap: 16px;
+        margin-top: auto;
+        margin-bottom: -10px;
+    }
+
+    img{
+        height: 39px;
+    }
+
+    p {
+        font-size: 24px;
+
+        @include mediumScreen {
+            font-size: 18px;
+        }
+
+        @include smallScreen {
+            font-size: 12px;
+            width: 133px;
+            text-align: center;
+        }
+    }
+}
