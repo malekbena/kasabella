@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const About = require('../models/aboutModel')
+const checkToken = require('../middlewares/index')
 
 //get
 router.get('/abouts', async (req, res) => {
@@ -24,10 +25,7 @@ router.get('/about/:id', async (req, res) => {
 
 //add
 router.post('/about',
-    (req, res, next) => {
-        console.log('Check middleware')
-        next()
-    },
+    checkToken,
     async (req, res) => {
         try {
             const about = await About.create(req.body)
@@ -40,10 +38,7 @@ router.post('/about',
 
 //update
 router.patch('/about/:id',
-    (req, res, next) => {
-        console.log('Check middleware')
-        next()
-    },
+    checkToken,
     async (req, res) => {
         try {
             const { id } = req.params
@@ -58,13 +53,10 @@ router.patch('/about/:id',
 
         }
     })
-    
+
 //delete
 router.delete('/about/:id',
-    (req, res, next) => {
-        console.log('Check middleware')
-        next()
-    },
+    checkToken,
     async (req, res) => {
         try {
             const { id } = req.params

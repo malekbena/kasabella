@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Accomodation = require('../models/accomodationModel')
+const checkToken = require('../middlewares/index')
 
 //get
 router.get('/accomodations', async (req, res) => {
@@ -24,10 +25,7 @@ router.get('/accomodation/:id', async (req, res) => {
 
 //add
 router.post('/accomodation',
-    (req, res, next) => {
-        console.log('Check middleware')
-        next()
-    },
+    checkToken,
     async (req, res) => {
         try {
             const accomodation = await Accomodation.create(req.body)
@@ -40,10 +38,7 @@ router.post('/accomodation',
 
 //update
 router.patch('/accomodation/:id',
-    (req, res, next) => {
-        console.log('Check middleware')
-        next()
-    },
+    checkToken,
     async (req, res) => {
         try {
             const { id } = req.params
@@ -60,10 +55,7 @@ router.patch('/accomodation/:id',
     })
 //delete
 router.delete('/accomodation/:id',
-    (req, res, next) => {
-        console.log('Check middleware')
-        next()
-    },
+    checkToken,
     async (req, res) => {
         try {
             const { id } = req.params
