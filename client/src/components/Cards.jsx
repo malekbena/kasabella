@@ -5,12 +5,12 @@ const Cards = ({ accomodations }) => {
         <>
             {
                 accomodations && (
-
+                    
                     <div className="cards">
                         {accomodations.map((data) => {
                             return (
-                                <article key={data.id}>
-                                    <NavLink to={`/logement/${data.id}`}>
+                                <article key={data._id}>
+                                    <NavLink to={`/logement/${data._id}`}>
                                         <div className="card_overlay"></div>
                                         <img src={data.cover} alt={data.title} />
                                         <div className="card_text">

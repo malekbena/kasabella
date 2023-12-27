@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 const db = require('./db/connection')
 const jwt = require('jsonwebtoken')
-require('dotenv').config({ path: '.env.local'})
+require('dotenv').config({ path: '.env.local' })
+const cors = require('cors')
 
 db.then(() => {
     app.listen(9000, () => {
@@ -18,6 +19,7 @@ const aboutsRouter = require('./routes/abouts')
 const usersRouter = require('./routes/users')
 
 app.use(express.json())
+app.use(cors())
 
 app.use('/', accomodationsRouter)
 

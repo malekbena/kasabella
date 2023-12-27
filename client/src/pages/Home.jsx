@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Banner from "../components/Banner"
 import Cards from "../components/Cards";
-import { getData } from "../util"
+import { getData } from "../util";
 
 import homeBanner from "../assets/beach.png"
 
@@ -10,8 +10,8 @@ const Home = () => {
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    getData("/api/data.json").then((data) => {
-      setData(data)
+    getData('/accomodations').then((data) => {
+      setData(data.accomodations)
       setIsLoaded(true)
     })
   }, []);

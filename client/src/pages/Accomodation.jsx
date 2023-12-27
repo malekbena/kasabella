@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-// import data from "../data/data.json";
 import Carousel from "../components/Carousel";
 import Tag from "../components/Tag";
 import Rating from "../components/Rating";
@@ -14,8 +13,8 @@ const Accomodation = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    getData('/api/data.json').then((data) => {
-      let res = data.find((accomodation) => accomodation.id === id)
+    getData('/accomodations').then((data) => {
+      let res = data.accomodations.find((accomodation) => accomodation._id === id)
       if (!res) {
         navigate('/404')
       }

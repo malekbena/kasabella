@@ -11,8 +11,8 @@ const About = () => {
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
-        getData('/api/about.json').then((data) => {
-            setData(data)
+        getData('/abouts').then((data) => {
+            setData(data.abouts)
             setIsLoaded(true)
         })
     }, [])
