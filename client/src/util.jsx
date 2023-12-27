@@ -5,3 +5,7 @@ export const getData = async (url) => {
     const data = res.data
     return data
 }
+
+export const disconnect = () => {
+    localStorage.removeItem('token')
+}
