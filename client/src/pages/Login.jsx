@@ -1,11 +1,16 @@
-import { useState, useEffect} from 'react'
-import axios from 'axios'
+import { useState, useEffect, useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext'
 
 const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [isLogged, setIsLogged] = useState(false)
+
+    const { isLogged, login } = useContext(AuthContext)
+    
+    const send = (e) => {
+        login(e, username, password)
+    }
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -14,16 +19,7 @@ const Login = () => {
         }
     }, [isLogged, navigate])
 
-    const send = (e) => {
-        e.preventDefault()
-        axios.post('http://localhost:9000/auth/login', {
-            username: username,
-            password: password
-        }).then((res) => {
-            localStorage.setItem('token', res.data.token)
-            setIsLogged(true)
-        })
-    }
+    
     return (
         <div>
             <h1>Login</h1>

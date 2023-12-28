@@ -6,9 +6,6 @@ import About from '../pages/About';
 import Accomodation from '../pages/Accomodation';
 import Login from '../pages/Login';
 
-const isLogged = () => {
-    return localStorage.getItem('token') !== null
-}
 
 const router = createBrowserRouter([
     {
@@ -34,7 +31,9 @@ const router = createBrowserRouter([
                 path: "*",
                 element: <Error404 />,
             },
+            
         ]
+
     }
 ])
 

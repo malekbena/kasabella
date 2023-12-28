@@ -29,17 +29,17 @@ router.post('/login', async (req, res) => {
     const body = req.body
     const user = await User.findOne({ username: body.username })
     if (!user) {
-        return res.status(400).json({ message: 'User not found' })
+        return res.status(400).json({ message: 'Username or password incorrect' })
     }
     const validPassword = await bcrypt.compare(body.password, user.password)
     if (!validPassword) {
-        return res.status(400).json({ message: 'Password not correct' })
+        return res.status(400).json({ message: 'Username or password incorrect' })
     }
     jwt.sign({ user }, process.env.PRIVATE_KEY, { algorithm: 'RS256' }, (err, token) => {
         if (err) {
             return res.status(500).json({ message: err.message })
         }
-        res.status(200).json({ token })
+        res.status(200).json({ id: user._id, username: user.username, token: token })
     })
 })
 

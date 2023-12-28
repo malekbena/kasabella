@@ -1,23 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import { disconnect } from '../util'
 import logo from '../assets/logo_white.png'
+import { AuthContext } from '../context/AuthContext'
+
 const Footer = () => {
-    const [isLogged, setIsLogged] = useState(false)
     const currentYear = new Date().getFullYear()
+    const {isLogged, user, logout} = useContext(AuthContext)
 
     useEffect(() => {
-        if (localStorage.getItem('token')) {
-            setIsLogged(true)
-        } else {
-            setIsLogged(false)
-        }
+        console.log(isLogged)
     }, [isLogged])
 
     const handleDisconnect = (e) => {
         e.preventDefault()
-        disconnect()
-        setIsLogged(false)
+        logout()
     }
 
 
@@ -29,9 +25,14 @@ const Footer = () => {
             </p>
             {
                 isLogged ?
+                    <>
+                        <p>
+                            Bonjour {user.username}
+                        </p>
                     <button onClick={e => handleDisconnect(e)}>
                         Déconnexion
                     </button>
+                    </>
                     :
                     <NavLink to={'/login'}>
                         Connexion
