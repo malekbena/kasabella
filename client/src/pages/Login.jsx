@@ -8,9 +8,12 @@ const Login = () => {
 
     const { isLogged, login } = useContext(AuthContext)
     
-    const send = (e) => {
-        login(e, username, password)
+
+    const handleLogin = (e) => {
+        e.preventDefault()
+        login(username, password)
     }
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -28,7 +31,7 @@ const Login = () => {
                 <input id="username" type="text" onChange={e => setUsername(e.target.value)} />
                 <label htmlFor="password">Mot de passe</label>
                 <input id="password" type="password" onChange={e => setPassword(e.target.value)} />
-                <input type="submit" value="Valider" onClick={e => { send(e) }} />
+                <input type="submit" value="Valider" onClick={e => { handleLogin(e) }} />
             </form>
         </div>
     );

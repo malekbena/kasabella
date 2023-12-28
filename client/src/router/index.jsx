@@ -5,6 +5,8 @@ import Home from '../pages/Home';
 import About from '../pages/About';
 import Accomodation from '../pages/Accomodation';
 import Login from '../pages/Login';
+import CheckAuth from '../layout/checkAuth';
+import Dashboard from '../pages/Dashboard';
 
 
 const router = createBrowserRouter([
@@ -31,7 +33,16 @@ const router = createBrowserRouter([
                 path: "*",
                 element: <Error404 />,
             },
-            
+            {
+                element: <CheckAuth />,
+                children: [
+                    {
+                        path: "/dashboard",
+                        element: <Dashboard />,
+                    }
+                ]
+            }
+
         ]
 
     }
