@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 
 const Login = () => {
@@ -7,7 +7,7 @@ const Login = () => {
     const [password, setPassword] = useState('')
 
     const { isLogged, login } = useContext(AuthContext)
-    
+    const location = useLocation()
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -18,9 +18,10 @@ const Login = () => {
 
     useEffect(() => {
         if (isLogged) {
-            navigate('/')
+            navigate(location.state ? location.state : '/')
+            
         }
-    }, [isLogged, navigate])
+    }, [isLogged, navigate, location.state])
 
     
     return (
