@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom"
 
-const Button = ({ text, onClick, className, isLink }) => {
+const Button = ({ text, onClick, className, link }) => {
     return (
         <>
             {
-                isLink ?
-                    <NavLink className={`button ${className}`} to={'/login'}>
+                link ?
+                    <NavLink className={`button ${className}`} to={link}>
                         {text}
                     </NavLink>
                     :

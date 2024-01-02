@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
 import logo from '../assets/logo_white.png'
 import { AuthContext } from '../context/AuthContext'
 import Button from './Button'
@@ -29,7 +28,7 @@ const Footer = () => {
                         <Button text={'Déconnexion'} onClick={e => handleLogout(e)} />
                     </>
                     :
-                    <Button text={'Connexion'} isLink />
+                    <Button text={'Connexion'} link={"/login"} />
                     
             }
         </footer>
