@@ -1,6 +1,17 @@
-const Button = ({ text, onClick, className }) => {
+import { NavLink } from "react-router-dom"
+
+const Button = ({ text, onClick, className, isLink }) => {
     return (
-        <button className={`button ${className}`} onClick={onClick}>{text}</button>
+        <>
+            {
+                isLink ?
+                    <NavLink className={`button ${className}`} to={'/login'}>
+                        {text}
+                    </NavLink>
+                    :
+                    <button className={`button ${className}`} onClick={onClick}>{text}</button>
+            }
+        </>
     )
 }
 

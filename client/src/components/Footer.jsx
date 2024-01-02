@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../assets/logo_white.png'
 import { AuthContext } from '../context/AuthContext'
+import Button from './Button'
 
 const Footer = () => {
     const currentYear = new Date().getFullYear()
@@ -25,14 +26,11 @@ const Footer = () => {
                         <p>
                             Bonjour {user.username}
                         </p>
-                    <button onClick={e => handleLogout(e)}>
-                        Déconnexion
-                    </button>
+                        <Button text={'Déconnexion'} onClick={e => handleLogout(e)} />
                     </>
                     :
-                    <NavLink to={'/login'}>
-                        Connexion
-                    </NavLink>
+                    <Button text={'Connexion'} isLink />
+                    
             }
         </footer>
     );

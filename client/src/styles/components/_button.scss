@@ -12,11 +12,12 @@
     padding: 4px 30px;
     border: none;
     cursor: pointer;
+    text-decoration: none;
 
     &:hover {
         background: $secondary_color;
         color: $primary_color;
-        border : 1px solid $primary_color;
+        // border : 1px solid $primary_color;
     }
     @include mediumScreen {
         font-size: 12px;

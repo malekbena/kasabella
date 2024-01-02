@@ -508,11 +508,11 @@ footer p {
   padding: 4px 30px;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 .button:hover {
   background: #E3E3E3;
   color: #FF6060;
-  border: 1px solid #FF6060;
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .button {
