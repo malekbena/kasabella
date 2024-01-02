@@ -1,7 +1,7 @@
 @import './base/_typo';
 @import './utils/_variables';
 @import './utils/_mixins';
-@import './layouts/layout';
+@import './layouts/_layout';
 @import './layouts/_navbar';
 @import './layouts/_footer';
 @import './components/_banner';
@@ -10,9 +10,11 @@
 @import './components/carousel';
 @import './components/_tag';
 @import './components/_rating';
-@import './pages/about';
-@import './pages/error404';
-@import './pages/accomodation';
+@import './components/_button';
+@import './pages/_about';
+@import './pages/_error404';
+@import './pages/_accomodation';
+@import './pages/_dashboard';
 
 html, body, * {
     margin: 0;

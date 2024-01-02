@@ -494,6 +494,38 @@ footer p {
   }
 }
 
+.button {
+  background: #FF6060;
+  color: #FFFFFF;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 30px;
+  border: none;
+  cursor: pointer;
+}
+.button:hover {
+  background: #E3E3E3;
+  color: #FF6060;
+  border: 1px solid #FF6060;
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .button {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .button {
+    font-size: 10px;
+    padding: 4px 20px;
+  }
+}
+
 .about {
   display: flex;
   flex-direction: column;
@@ -690,6 +722,19 @@ footer p {
     flex-direction: column;
     gap: 20px;
   }
+}
+
+.dashboard h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #FF6060;
+}
+.dashboard_titles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 html, body, * {

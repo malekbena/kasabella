@@ -1,0 +1,15 @@
+.dashboard {
+    h1{
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-align: center;
+        color: $primary_color;
+    }
+
+    &_titles {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
