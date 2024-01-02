@@ -1,8 +1,6 @@
 const express = require('express')
 const app = express()
 const db = require('./db/connection')
-const jwt = require('jsonwebtoken')
-require('dotenv').config({ path: '.env.local' })
 const cors = require('cors')
 
 db.then(() => {
@@ -26,7 +24,3 @@ app.use('/', accomodationsRouter)
 app.use('/', aboutsRouter)
 
 app.use('/auth', usersRouter)
-
-// clés ssh public / privé
-
-// middleware qui verifie le token pour add/update/delete

@@ -3,7 +3,9 @@ const router = express.Router()
 const User = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-require('dotenv').config({ path: '.env.local' })
+const fs = require('fs')
+
+const privateKey = fs.readFileSync('./keys/jwtRS256.key', 'utf8')
 
 //singup
 router.post('/signup', async (req, res) => {
@@ -27,6 +29,7 @@ router.post('/signup', async (req, res) => {
 //login
 router.post('/login', async (req, res) => {
     const body = req.body
+    const expiresIn = '1h'
     const user = await User.findOne({ username: body.username })
     if (!user) {
         return res.status(400).json({ message: 'Username or password incorrect' })
@@ -35,7 +38,7 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
         return res.status(400).json({ message: 'Username or password incorrect' })
     }
-    jwt.sign({ user }, process.env.PRIVATE_KEY, { algorithm: 'RS256' }, (err, token) => {
+    jwt.sign({ user, exp:60*60 }, privateKey, { algorithm: 'RS256' }, (err, token) => {
         if (err) {
             return res.status(500).json({ message: err.message })
         }

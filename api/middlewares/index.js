@@ -1,35 +1,11 @@
 const jwt = require('jsonwebtoken')
 require('dotenv').config({ path: '.env.local' })
-
-const pvt_key = process.env.PRIVATE_KEY
-const pub_key = process.env.PUBLIC_KEY
-
-// const payload = {
-//     message : "Hi friends !"
-// }
+const fs = require('fs')
 
 
-// const accessTokenSecret = JWT.sign(payload, pvt_key, { algorithm: 'RS256' })
+const pvt_key = fs.readFileSync('./keys/jwtRS256.key', 'utf8')
+const pub_key = fs.readFileSync('./keys/jwtRS256.key.pub', 'utf8')
 
-// const decode = JWT.verify(accessTokenSecret, pub_key, {
-//     algorithms: 'RS256'
-// })
-
-// const checkToken = (req, res, next) => {
-// const authHeader = req.headers.authorization
-// if (authHeader) {
-//     const token = authHeader.split(' ')[1]
-//     JWT.verify(token, pvt_key, (err) => {
-//         if (err) {
-//             return res.sendStatus(403)
-//         }
-//         console.log('chekToken success')
-//         next()
-//     })
-// } else {
-//     res.sendStatus(401)
-// }
-// }
 function verifyAccessToken(token) {
 
     try {
