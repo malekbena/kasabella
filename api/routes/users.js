@@ -7,6 +7,7 @@ const fs = require('fs')
 
 const privateKey = fs.readFileSync('./keys/jwtRS256.key', 'utf8')
 
+
 //singup
 router.post('/signup', async (req, res) => {
     const body = req.body
@@ -29,7 +30,6 @@ router.post('/signup', async (req, res) => {
 //login
 router.post('/login', async (req, res) => {
     const body = req.body
-    const expiresIn = '30m'
     const user = await User.findOne({ username: body.username })
     if (!user) {
         return res.status(400).json({ message: 'Username or password incorrect' })
@@ -38,11 +38,21 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
         return res.status(400).json({ message: 'Username or password incorrect' })
     }
-    jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: expiresIn }, (err, token) => {
+    const accessToken = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: "30m" })
+    const refreshToken = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: '1h' })
+    res.status(200).json({id: user._id ,username: user.username, accessToken, refreshToken })
+})
+
+router.post('/refresh', async (req, res) => {
+    const authHeader = req.headers.authorization
+    const token = authHeader.split(' ')[1]
+    jwt.verify(token, privateKey, { algorithms: ['RS256'] }, (err, decoded) => {
         if (err) {
-            return res.status(500).json({ message: err.message })
-        }
-        res.status(200).json({ id: user._id, username: user.username, token: token })
+            res.status(401).json({ message: 'Token is not valid' })
+            }
+        const accessToken = jwt.sign({ user: decoded.user }, privateKey, { algorithm: 'RS256', expiresIn: "30m" })
+        const refreshToken = jwt.sign({ user: decoded.user }, privateKey, { algorithm: 'RS256', expiresIn: '1h' })
+        res.status(200).json({ accessToken, refreshToken })
     })
 })
 
