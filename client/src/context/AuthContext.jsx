@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('id', res.data.id)
             localStorage.setItem('username', res.data.username)
             localStorage.setItem('token', res.data.token)
-            // localStorage.setItem('user', JSON.stringify(res.data))
+            localStorage.setItem('refreshToken', res.data.refreshToken)
             setIsLogged(true)
             setUser({ username: res.data.username, id: res.data.id })
         })
@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         localStorage.removeItem('token')
+        localStorage.removeItem('refreshToken')
         localStorage.removeItem('username')
         localStorage.removeItem('id')
         setIsLogged(false)
