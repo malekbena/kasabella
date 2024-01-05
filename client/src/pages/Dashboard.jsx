@@ -77,6 +77,18 @@ const Dashboard = () => {
                             <input type="text" name="cover" id="cover" />
                             <label htmlFor="description">Description</label>
                             <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                            <label htmlFor="hostname">Nom de l'hôte</label>
+                            <input type="text" name="hostname" id="hostname" />
+                            <label htmlFor="hostPicture">Photo de l'hôte</label>
+                            <input type="text" name="hostPicture" id="hostPicture" />
+                            <label htmlFor="rating">Note</label>
+                            <input type="number" name="rating" id="rating" min={0} max={5} />
+                            <label htmlFor="location">Localisation</label>
+                            <input type="text" name="location" id="location" />
+                            <label htmlFor="equipments">Équipements</label>
+                            <input type="text" name="equipments" id="equipments" />
+                            <label htmlFor="tags">Tags</label>
+                            <input type="text" name="tags" id="tags" />
                             <Button text="Ajouter" className="button__add" />
                             <Button text="Annuler" onClick={e => closeModal(e)} />
                         </form>
