@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ message: 'Username or password incorrect' })
     }
     const accessToken = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: "30m" })
-    const refreshToken = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: '1h' })
+    const refreshToken = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: '7d' })
     res.status(200).json({id: user._id ,username: user.username, token: accessToken, refreshToken })
 })
 
@@ -55,7 +55,7 @@ router.post('/refresh', async (req, res) => {
             return res.status(400).json({ message: 'User not found' })
         }
         const accessToken = jwt.sign({ user: decoded.user }, privateKey, { algorithm: 'RS256', expiresIn: "30m" })
-        const refreshToken = jwt.sign({ user: decoded.user }, privateKey, { algorithm: 'RS256', expiresIn: '1h' })
+        const refreshToken = jwt.sign({ user: decoded.user }, privateKey, { algorithm: 'RS256', expiresIn: '7d' })
         res.status(200).json({ accessToken, refreshToken })
     })
 })
