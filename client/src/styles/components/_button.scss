@@ -14,10 +14,22 @@
     cursor: pointer;
     text-decoration: none;
 
+    &__edit {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        // background: $secondary_color;
+        // color: $primary_color;
+    }
+    &__delete {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+
     &:hover {
         background: $secondary_color;
         color: $primary_color;
-        // border : 1px solid $primary_color;
     }
     @include mediumScreen {
         font-size: 12px;

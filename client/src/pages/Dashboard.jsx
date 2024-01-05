@@ -27,7 +27,7 @@ const Dashboard = () => {
             </div>
             {
                 isLoaded && data &&
-                <Cards accomodations={data} />
+                <Cards accomodations={data} isAdmin />
             }
         </div>
     )

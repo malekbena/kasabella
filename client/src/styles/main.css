@@ -510,6 +510,16 @@ footer p {
   cursor: pointer;
   text-decoration: none;
 }
+.button__edit {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.button__delete {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
 .button:hover {
   background: #E3E3E3;
   color: #FF6060;
