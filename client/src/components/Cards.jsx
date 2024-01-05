@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import Button from "./Button";
 
-const Cards = ({ accomodations, isAdmin }) => {
+const Cards = ({ accomodations, isAdmin, onClick }) => {
     return (
         <>
             {
@@ -16,8 +16,8 @@ const Cards = ({ accomodations, isAdmin }) => {
                                             <>
                                                 <div className="card_overlay"></div>
                                                 <img src={data.cover} alt={data.title} />
-                                                    <Button text="Modifier" className="button__edit" />
-                                                    <Button text="Supprimer" className="button__delete" />
+                                                    <Button value={"edit"} dataId={data._id} text="Modifier" className="button__edit" onClick={onClick} />
+                                                    <Button value={"delete"} dataId={data._id} text="Supprimer" className="button__delete" onClick={onClick} />
                                                 <div className="card_text">
                                                     <p>{data.title}</p>
                                                 </div>

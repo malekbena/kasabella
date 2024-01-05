@@ -5,4 +5,3 @@ export const getData = async (url) => {
     const data = res.data
     return data
 }
-

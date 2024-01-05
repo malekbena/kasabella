@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 
-const Button = ({ text, onClick, className, link }) => {
+const Button = ({ text, onClick, className, link, value, dataId }) => {
     return (
         <>
             {
@@ -9,7 +9,7 @@ const Button = ({ text, onClick, className, link }) => {
                         {text}
                     </NavLink>
                     :
-                    <button className={`button ${className}`} onClick={onClick}>{text}</button>
+                    <button value={value} data-id={dataId} className={`button ${className}`} onClick={onClick}>{text}</button>
             }
         </>
     )
