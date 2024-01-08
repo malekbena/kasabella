@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react"
-import { getData, getAccomodation } from "../util"
+import { getData, getAccomodation, postAccomodation } from "../util"
 import Cards from "../components/Cards"
 import Button from "../components/Button"
 import Modal from "react-modal"
@@ -80,6 +80,31 @@ const Dashboard = () => {
         }
     }
 
+    const handleChange = (e) => {
+        e.preventDefault()
+        setModalData({ ...modalData, [e.target.name]: e.target.value })
+    }
+    const sendForm = (e) => {
+        e.preventDefault()
+        let body = {
+            "title": modalData.title,
+            "cover": modalData.cover,
+            "description": modalData.description,
+            "location": modalData.location,
+            "host": {
+                "name": modalData.hostname,
+                "picture": modalData.hostPicture
+            },
+            "rating": modalData.rating,
+            "equipments": equipments,
+            "tags": tags,
+            "pictures": pictures
+        }
+        
+        const token = localStorage.getItem('token')
+        postAccomodation(token, body, modalType)
+        setModalIsOpen(false)
+    }
 
     return (
         <div className="dashboard">
@@ -99,7 +124,10 @@ const Dashboard = () => {
                 equipments={equipments}
                 tags={tags}
                 handleAdd={handleAdd}
-                handleDelete={handleDelete} />            
+                handleDelete={handleDelete}
+                onChange={handleChange}
+                sendForm={sendForm}
+            />            
             {
                 isLoaded && data &&
                 <Cards accomodations={data} isAdmin onClick={e => openModal(e)} />
