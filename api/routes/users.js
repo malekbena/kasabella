@@ -44,8 +44,7 @@ router.post('/login', async (req, res) => {
 })
 
 router.post('/refresh', async (req, res) => {
-    const authHeader = req.headers.authorization
-    const token = authHeader.split(' ')[1]
+    const token = req.body.refreshToken
     jwt.verify(token, privateKey, { algorithms: ['RS256'] }, (err, decoded) => {
         if (err) {
             res.status(401).json({ message: 'Token is not valid' })

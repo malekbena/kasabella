@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import axios from 'axios'
+import { jwtDecode } from 'jwt-decode'
 
 export const AuthContext = createContext()
 
@@ -38,7 +39,19 @@ export const AuthProvider = ({ children }) => {
             const username = localStorage.getItem('username')
             const userId = localStorage.getItem('id')
             if (token) {
+                const decoded = jwtDecode(token)
                 setUser({ username: username, id: userId })
+                if (decoded.exp < Date.now() / 1000) {
+                    const refreshToken = localStorage.getItem('refreshToken')
+                    await axios.post('http://localhost:9000/auth/refresh', {
+                        refreshToken: refreshToken
+                    }).then((res) => {
+                        localStorage.setItem('token', res.data.accessToken)
+                        localStorage.setItem('refreshToken', res.data.refreshToken)
+                    }).catch((err) => {
+                        console.log(err)
+                    })
+                }
             }
             setIsLogged(!!token)
         }
