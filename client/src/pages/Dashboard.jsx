@@ -11,6 +11,9 @@ const Dashboard = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [modalType, setModalType] = useState('')
     const [modalData, setModalData] = useState({})
+    const [pictures, setPictures] = useState([])
+    const [equipments, setEquipments] = useState([])
+    const [tags, setTags] = useState([])
 
     const { user } = useContext(AuthContext)
     Modal.setAppElement('#root')
@@ -42,6 +45,25 @@ const Dashboard = () => {
         e.preventDefault()
         setModalIsOpen(false)
     }
+
+    const handleAdd = (e) => {
+        e.preventDefault()
+        if (e.target.value === 'picture') {
+            const input = document.getElementById(`pictures`)
+            if(input.value === '') return
+            setPictures([...pictures, input.value])
+            input.value = ''
+        }
+    }
+
+    const handleDelete = (e, index) => {
+        e.preventDefault()
+        if (e.target.value === 'picture') {
+            const newPictures = pictures.filter((picture, i) => i !== index)
+            setPictures(newPictures)
+        }
+    }
+
     const customStyles = {
         content: {
             display: 'flex',
@@ -53,6 +75,12 @@ const Dashboard = () => {
         form: {
             display: 'flex',
             flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        formPictures: {
+            display: 'flex',
+            flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
         }
@@ -75,6 +103,23 @@ const Dashboard = () => {
                             <input type="text" name="title" id="title" />
                             <label>Cover</label>
                             <input type="text" name="cover" id="cover" />
+                            <label htmlFor="pictures">Photos</label>
+                            <div style={customStyles.formPictures}>
+                                <input type="text" name="pictures" id="pictures" />
+                                <Button text="+" value={'picture'} onClick={e => handleAdd(e)} />
+                            </div>
+                            {
+                                pictures.length > 0 &&
+                                pictures.map((picture, index) => {
+                                    return (
+                                        <div key={index} style={customStyles.formPictures}>
+                                            <input type="text" name="pictures" id={`picture${index}`} value={picture} readOnly/>
+                                            <Button text="-" value={'picture'} onClick={e=> handleDelete(e, index)} />
+                                        </div>
+                                    )
+                                })
+                            }
+
                             <label htmlFor="description">Description</label>
                             <textarea name="description" id="description" cols="30" rows="10"></textarea>
                             <label htmlFor="hostname">Nom de l'hôte</label>
