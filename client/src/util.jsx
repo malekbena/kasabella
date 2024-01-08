@@ -5,3 +5,8 @@ export const getData = async (url) => {
     const data = res.data
     return data
 }
+
+export const getAccomodation = (id, data, setModalData) => {
+    const accomodation = data.find((accomodation) => accomodation._id === id)
+    setModalData(accomodation)
+}
