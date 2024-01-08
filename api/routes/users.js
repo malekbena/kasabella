@@ -3,9 +3,9 @@ const router = express.Router()
 const User = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const fs = require('fs')
+require('dotenv').config({ path: './config/.env.local' })
 
-const privateKey = fs.readFileSync('./keys/jwtRS256.key', 'utf8')
+const privateKey = process.env.PRIVATE_KEY
 
 
 //singup

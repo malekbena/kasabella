@@ -1,15 +1,15 @@
 const jwt = require('jsonwebtoken')
 require('dotenv').config({ path: '.env.local' })
-const fs = require('fs')
 
 
-const pvt_key = fs.readFileSync('./keys/jwtRS256.key', 'utf8')
-const pub_key = fs.readFileSync('./keys/jwtRS256.key.pub', 'utf8')
+
+const privateKey = process.env.PRIVATE_KEY
+const publicKey = process.env.PUBLIC_KEY
 
 function verifyAccessToken(token) {
 
     try {
-        const decoded = jwt.verify(token, pvt_key, { algorithms: 'RS256' });
+        const decoded = jwt.verify(token, privateKey, { algorithms: 'RS256' });
         return { success: true, data: decoded };
     } catch (error) {
         return { success: false, error: error.message };
