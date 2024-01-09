@@ -15,6 +15,7 @@ const Dashboard = () => {
     const [pictures, setPictures] = useState([])
     const [equipments, setEquipments] = useState([])
     const [tags, setTags] = useState([])
+    const [id, setId] = useState('')
 
     const { user } = useContext(AuthContext)
     Modal.setAppElement('#root')
@@ -26,16 +27,28 @@ const Dashboard = () => {
         })
     }, []);
 
+    useEffect(() => {
+        if (!modalIsOpen) {
+            getData('/accomodations').then((data) => {
+                setData(data.accomodations)
+                setIsLoaded(true)
+            })
+        }
+    }, [modalIsOpen, data]);
+    
+
 
     const openModal = (e) => {
         e.preventDefault()
-        setModalIsOpen(true)
         setModalType(e.target.value)
         if (e.target.value === 'edit') {
-            if (e.target.dataset.id) {
-                getAccomodation(e.target.dataset.id, data, setModalData)
-            }
+            getAccomodation(e.target.dataset.id, data, setModalData)
+            console.log(modalData)
         }
+        if (e.target.value === 'delete') {
+            setId(e.target.dataset.id)
+        }
+        // setModalIsOpen(true)
     }
     const closeModal = (e) => {
         e.preventDefault()
@@ -84,8 +97,15 @@ const Dashboard = () => {
         e.preventDefault()
         setModalData({ ...modalData, [e.target.name]: e.target.value })
     }
+
     const sendForm = (e) => {
         e.preventDefault()
+        const token = localStorage.getItem('token')
+        if (modalType === 'delete') {
+            postAccomodation(token, { id }, modalType)
+            setModalIsOpen(false)
+            return
+        }
         let body = {
             "title": modalData.title,
             "cover": modalData.cover,
@@ -101,7 +121,6 @@ const Dashboard = () => {
             "pictures": pictures
         }
         
-        const token = localStorage.getItem('token')
         postAccomodation(token, body, modalType)
         setModalIsOpen(false)
     }
