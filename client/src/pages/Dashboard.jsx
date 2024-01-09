@@ -37,18 +37,32 @@ const Dashboard = () => {
     }, [modalIsOpen, data]);
     
 
-
     const openModal = (e) => {
         e.preventDefault()
         setModalType(e.target.value)
+        if (e.target.value === 'add') {
+            setModalData({})
+            setPictures([])
+            setEquipments([])
+            setTags([])
+            setModalIsOpen(true)
+        }
         if (e.target.value === 'edit') {
-            getAccomodation(e.target.dataset.id, data, setModalData)
-            console.log(modalData)
+            getAccomodation(e.target.dataset.id, data)
+                .then((res) => {
+                    setModalData(res)
+                    setPictures(res.pictures)
+                    setEquipments(res.equipments)
+                    setTags(res.tags)
+                    setId(res._id)
+                    setModalIsOpen(true)
+                })
+            setModalIsOpen(true)
         }
         if (e.target.value === 'delete') {
             setId(e.target.dataset.id)
+            setModalIsOpen(true)
         }
-        // setModalIsOpen(true)
     }
     const closeModal = (e) => {
         e.preventDefault()
@@ -120,8 +134,13 @@ const Dashboard = () => {
             "tags": tags,
             "pictures": pictures
         }
-        
-        postAccomodation(token, body, modalType)
+        if (modalType === 'edit') {
+            // postAccomodation(token, body, modalType, id)
+            
+        }
+        if (modalType === 'add') {
+            postAccomodation(token, body, modalType)
+        }
         setModalIsOpen(false)
     }
 

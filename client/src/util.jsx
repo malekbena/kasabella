@@ -6,12 +6,12 @@ export const getData = async (url) => {
     return data
 }
 
-export const getAccomodation = async (id, data, setModalData) => {
-    const accomodation = await data.find((accomodation) => accomodation._id === id)
-    setModalData(accomodation)
+export const getAccomodation = async (id, data) => {
+    return await data.find((accomodation) => accomodation._id === id)
+    
 }
 
-export const postAccomodation = async (token, body, type) => {
+export const postAccomodation = async (token, body, type, id) => {
     let headers = {
         Authorization: `Bearer ${token}`,
         "Content-Type": 'application/json'
@@ -26,7 +26,7 @@ export const postAccomodation = async (token, body, type) => {
             })
     }
     if (type === 'edit') {
-        axios.put(`http://localhost:9000/accomodation/${body.id}`, body, { headers: headers })
+        axios.put(`http://localhost:9000/accomodation/${id}`, body, { headers: headers })
             .then(res => {
                 return res.data
             })
