@@ -42,7 +42,6 @@ const ModalForm = ({ isOpen, closeModal, modalType, modalData, pictures, tags, e
                                         }
                             <label htmlFor="description">Description</label>
                             <textarea name="description" id="description" cols="30" rows="10" onChange={e => onChange(e)}></textarea>
-
                             <label htmlFor="hostname">Nom de l'hôte</label>
                             <input type="text" name="hostname" id="hostname" onChange={e => onChange(e)} />
                             <label htmlFor="hostPicture">Photo de l'hôte</label>
@@ -99,9 +98,9 @@ const ModalForm = ({ isOpen, closeModal, modalType, modalData, pictures, tags, e
 
                                     <form>
                                         <label htmlFor="title">Titre</label>
-                                        <input type="text" name="title" id="title" onChange={e => onChange(e)} defaultValue={modalData.title} />
+                                        <input type="text" name="title" id="title" onChange={e => onChange(e)} value={modalData.title} />
                                         <label>Photo de couverture</label>
-                                        <input type="text" name="cover" id="cover" onChange={e => onChange(e)} defaultValue={modalData.cover} />
+                                        <input type="text" name="cover" id="cover" onChange={e => onChange(e)} value={modalData.cover} />
                                         <label htmlFor="pictures">Photos</label>
                                         <div className='formRow'>
                                             <input type="text" name="pictures" id="pictures" />
@@ -123,15 +122,15 @@ const ModalForm = ({ isOpen, closeModal, modalType, modalData, pictures, tags, e
                                         }
 
                                         <label htmlFor="description">Description</label>
-                                        <textarea name="description" id="description" cols="30" rows="10" onChange={e => onChange(e)} defaultValue={modalData.description}></textarea>
+                                        <textarea name="description" id="description" cols="30" rows="10" onChange={e => onChange(e)} value={modalData.description}></textarea>
                                         <label htmlFor="hostname">Nom de l'hôte</label>
-                                        <input type="text" name="hostname" id="hostname" onChange={e => onChange(e)} defaultValue={modalData.host.name} />
+                                        <input type="text" name="hostname" id="hostname" onChange={e => onChange(e)} value={modalData.host.name} />
                                         <label htmlFor="hostPicture">Photo de l'hôte</label>
-                                        <input type="text" name="hostPicture" id="hostPicture" onChange={e => onChange(e)} defaultValue={modalData.host.picture} />
+                                        <input type="text" name="hostPicture" id="hostPicture" onChange={e => onChange(e)} value={modalData.host.picture} />
                                         <label htmlFor="rating">Note</label>
-                                        <input type="number" name="rating" id="rating" min={0} max={5} onChange={e => onChange(e)} defaultValue={modalData.rating} />
+                                        <input type="number" name="rating" id="rating" min={0} max={5} onChange={e => onChange(e)} value={modalData.rating} />
                                         <label htmlFor="location">Localisation</label>
-                                        <input type="text" name="location" id="location" onChange={e => onChange(e)} defaultValue={modalData.location} />
+                                        <input type="text" name="location" id="location" onChange={e => onChange(e)} value={modalData.location} />
                                         <label htmlFor="equipments">Équipements</label>
                                         <div className='formRow'>
                                             <input type="text" name="equipments" id="equipments" />
