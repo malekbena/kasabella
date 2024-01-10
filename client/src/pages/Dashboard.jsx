@@ -2,9 +2,9 @@ import { useState, useEffect, useContext } from "react"
 import { getData, getAccomodation, postAccomodation } from "../util"
 import Cards from "../components/Cards"
 import Button from "../components/Button"
-
-import { AuthContext } from "../context/AuthContext"
 import ModalForm from "../components/ModalForm"
+import { AuthContext } from "../context/AuthContext"
+import { createPortal } from "react-dom"
 
 const Dashboard = () => {
     const [data, setData] = useState([])
@@ -34,8 +34,17 @@ const Dashboard = () => {
             })
         }
     }, [modalIsOpen, data]);
-    
 
+    useEffect(() => {
+        const handleEscapeKey = (event) => {
+            if (event.code === 'Escape') {
+                setModalIsOpen(false)
+            }
+        }
+
+        document.addEventListener('keydown', handleEscapeKey)
+        return () => document.removeEventListener('keydown', handleEscapeKey)
+    }, [])
     const openModal = (e) => {
         e.preventDefault()
         setModalType(e.target.value)
@@ -135,7 +144,7 @@ const Dashboard = () => {
         }
         if (modalType === 'edit') {
             // postAccomodation(token, body, modalType, id)
-            
+
         }
         if (modalType === 'add') {
             postAccomodation(token, body, modalType)
@@ -151,19 +160,20 @@ const Dashboard = () => {
                 <h2>Liste des logements</h2>
                 <Button value={'add'} text="Ajouter un logement" className="button-hover" onClick={e => openModal(e)} />
             </div>
-            <ModalForm
-                isOpen={modalIsOpen}
-                closeModal={closeModal}
-                modalData={modalData}
-                modalType={modalType}
-                pictures={pictures}
-                equipments={equipments}
-                tags={tags}
-                handleAdd={handleAdd}
-                handleDelete={handleDelete}
-                onChange={handleChange}
-                sendForm={sendForm}
-            />
+            {
+                createPortal(<ModalForm
+                    isOpen={modalIsOpen}
+                    closeModal={closeModal}
+                    modalData={modalData}
+                    modalType={modalType}
+                    pictures={pictures}
+                    equipments={equipments}
+                    tags={tags}
+                    handleAdd={handleAdd}
+                    handleDelete={handleDelete}
+                    onChange={handleChange}
+                    sendForm={sendForm}
+                />, document.body)}
             {
                 isLoaded && data &&
                 <Cards accomodations={data} isAdmin onClick={e => openModal(e)} />

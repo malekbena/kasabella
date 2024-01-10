@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import Button from "./Button";
 
 const ModalForm = ({ isOpen, closeModal, modalType, modalData, pictures, tags, equipments, onChange, handleAdd, handleDelete, sendForm }) => {
@@ -7,7 +6,11 @@ const ModalForm = ({ isOpen, closeModal, modalType, modalData, pictures, tags, e
         return null;
     }
     return (
-        <aside id="modal" className="modal" aria-hidden="true" role="dialog" aria-modal="false" >
+        <aside id="modal" className="modal" aria-hidden="true" role="dialog" aria-modal="false" onClick={(e) => {
+            if (e.target.id === "modal") {
+                closeModal(e)
+            }
+        }}>
             <div className="modal-wrapper">
                 <Button onClick={e => closeModal(e)} text={'Fermer'} className='button-hover close-modal-btn' />
                 {modalType === 'add' && (
