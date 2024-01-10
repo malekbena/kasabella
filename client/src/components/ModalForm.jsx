@@ -26,19 +26,22 @@ const ModalForm = ({ isOpen, closeModal, modalType, modalData, pictures, tags, e
                                 <input type="text" name="pictures" id="pictures" />
                                 <Button text="+" className='button-validate' value={'picture'} onClick={e => handleAdd(e)} />
                             </div>
+                            {
+                                            pictures && pictures.length > 0 &&
+                                            <div className="img-preview">
+                                                {pictures.map((picture, index) => {
+                                                    return (
+                                                        <div key={index} className='formRow'>
+                                                            <img id={`picture${index}`} src={picture} alt="" />
+                                                            <Button text="-" value={'picture'} onClick={e => handleDelete(e, index)} />
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+
+                                        }
                             <label htmlFor="description">Description</label>
                             <textarea name="description" id="description" cols="30" rows="10" onChange={e => onChange(e)}></textarea>
-                            {
-                                pictures.length > 0 &&
-                                pictures.map((picture, index) => {
-                                    return (
-                                        <div key={index} className='formRow'>
-                                            <input type="text" name="pictures" id={`picture${index}`} value={picture} readOnly />
-                                            <Button text="-" value={'picture'} onClick={e => handleDelete(e, index)} />
-                                        </div>
-                                    )
-                                })
-                            }
 
                             <label htmlFor="hostname">Nom de l'hôte</label>
                             <input type="text" name="hostname" id="hostname" onChange={e => onChange(e)} />
@@ -106,14 +109,17 @@ const ModalForm = ({ isOpen, closeModal, modalType, modalData, pictures, tags, e
                                         </div>
                                         {
                                             pictures && pictures.length > 0 &&
-                                            pictures.map((picture, index) => {
-                                                return (
-                                                    <div key={index} className='formRow'>
-                                                        <input type="text" name="pictures" id={`picture${index}`} value={picture} readOnly />
-                                                        <Button text="-" value={'picture'} onClick={e => handleDelete(e, index)} />
-                                                    </div>
-                                                )
-                                            })
+                                            <div className="img-preview">
+                                                {pictures.map((picture, index) => {
+                                                    return (
+                                                        <div key={index} className='formRow'>
+                                                            <img id={`picture${index}`} src={picture} alt="" />
+                                                            <Button text="-" value={'picture'} onClick={e => handleDelete(e, index)} />
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+
                                         }
 
                                         <label htmlFor="description">Description</label>
