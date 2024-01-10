@@ -26,7 +26,7 @@ export const postAccomodation = async (token, body, type, id) => {
             })
     }
     if (type === 'edit') {
-        axios.put(`http://localhost:9000/accomodation/${id}`, body, { headers: headers })
+        axios.patch(`http://localhost:9000/accomodation/${id}`, body, { headers: headers })
             .then(res => {
                 return res.data
             })

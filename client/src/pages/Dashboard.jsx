@@ -134,8 +134,8 @@ const Dashboard = () => {
             "description": modalData.description,
             "location": modalData.location,
             "host": {
-                "name": modalData.hostname,
-                "picture": modalData.hostPicture
+                "name": modalData.host.name,
+                "picture": modalData.host.picture
             },
             "rating": modalData.rating,
             "equipments": equipments,
@@ -143,7 +143,8 @@ const Dashboard = () => {
             "pictures": pictures
         }
         if (modalType === 'edit') {
-            // postAccomodation(token, body, modalType, id)
+            postAccomodation(token, body, modalType, id)
+            
 
         }
         if (modalType === 'add') {
