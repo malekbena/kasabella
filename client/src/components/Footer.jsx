@@ -25,8 +25,8 @@ const Footer = () => {
                         <p>
                             Bonjour {user.username}
                         </p>
-                        <Button text={'Tableau de bord'} link={"/dashboard"} />
-                        <Button text={'Déconnexion'} onClick={e => handleLogout(e)} />
+                        <Button text={'Tableau de bord'} link={"/dashboard"} className={'button-hover'} />
+                        <Button text={'Déconnexion'} onClick={e => handleLogout(e)} className={'button-hover'} />
                     </>
                     :
                     <Button text={'Connexion'} link={"/login"} />

@@ -1,5 +1,5 @@
 .button {
-    background : $primary_color;
+    background: $primary_color;
     color: $white_color;
     border-radius: 10px;
     font-size: 14px;
@@ -18,25 +18,44 @@
         position: absolute;
         top: 20px;
         right: 20px;
-        // background: $secondary_color;
-        // color: $primary_color;
     }
+
     &__delete {
         position: absolute;
         top: 20px;
         left: 20px;
     }
 
-    &:hover {
-        background: $secondary_color;
-        color: $primary_color;
-    }
+
     @include mediumScreen {
         font-size: 12px;
     }
+
     @include smallScreen {
         font-size: 10px;
         padding: 4px 20px;
-    } 
-    
+    }
+
+}
+
+.button-validate {
+    background-color: green;
+}
+
+.button-hover {
+    &:hover {
+        background-color: $secondary_color;
+        color: $primary_color;
+
+    }
+}
+
+.close-modal-btn {
+    position: relative;
+    top: 0;
+    left: 100%;
+    transform: translate(-100%, 0);
+}
+.form-validate-btn {
+    font-size: 1.2rem;
 }

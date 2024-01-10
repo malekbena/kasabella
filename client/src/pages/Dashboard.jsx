@@ -149,7 +149,7 @@ const Dashboard = () => {
             <p>Bonjour {user.username}</p>
             <div className="dashboard_titles">
                 <h2>Liste des logements</h2>
-                <Button value={'add'} text="Ajouter un logement" className="button__add" onClick={e => openModal(e)} />
+                <Button value={'add'} text="Ajouter un logement" className="button-hover" onClick={e => openModal(e)} />
             </div>
             <ModalForm
                 isOpen={modalIsOpen}

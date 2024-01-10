@@ -520,10 +520,6 @@ footer p {
   top: 20px;
   left: 20px;
 }
-.button:hover {
-  background: #E3E3E3;
-  color: #FF6060;
-}
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .button {
     font-size: 12px;
@@ -534,6 +530,26 @@ footer p {
     font-size: 10px;
     padding: 4px 20px;
   }
+}
+
+.button-validate {
+  background-color: green;
+}
+
+.button-hover:hover {
+  background-color: #E3E3E3;
+  color: #FF6060;
+}
+
+.close-modal-btn {
+  position: relative;
+  top: 0;
+  left: 100%;
+  transform: translate(-100%, 0);
+}
+
+.form-validate-btn {
+  font-size: 1.2rem;
 }
 
 .modal {
@@ -551,22 +567,66 @@ footer p {
 
 .modal-wrapper {
   overflow: auto;
-  max-width: 630px;
-  max-height: 730px;
+  width: 80%;
+  height: 80%;
   padding: 20px;
-  background-color: #E3E3E3;
+  background-color: #FFFFFF;
   border-radius: 10px;
+}
+.modal-wrapper h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #FF6060;
 }
 .modal-wrapper form {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
+.modal-wrapper form label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #FF6060;
+}
+.modal-wrapper form input,
+.modal-wrapper form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+.modal-wrapper form input:focus,
+.modal-wrapper form textarea:focus {
+  outline: green auto 1px;
+}
 .modal-wrapper form .formRow {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+.modal-wrapper form .form-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.modal-wrapper .delete-confirmation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+}
+.modal-wrapper .delete-confirmation p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #FF6060;
+}
+.modal-wrapper .delete-confirmation__btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .about {
