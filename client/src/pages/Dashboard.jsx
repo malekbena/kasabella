@@ -2,9 +2,9 @@ import { useState, useEffect, useContext } from "react"
 import { getData, getAccomodation, postAccomodation } from "../util"
 import Cards from "../components/Cards"
 import Button from "../components/Button"
-import Modal from "react-modal"
-import ModalCustom from "../components/ModalCustom"
+
 import { AuthContext } from "../context/AuthContext"
+import ModalForm from "../components/ModalForm"
 
 const Dashboard = () => {
     const [data, setData] = useState([])
@@ -18,7 +18,6 @@ const Dashboard = () => {
     const [id, setId] = useState('')
 
     const { user } = useContext(AuthContext)
-    Modal.setAppElement('#root')
 
     useEffect(() => {
         getData('/accomodations').then((data) => {
@@ -152,12 +151,11 @@ const Dashboard = () => {
                 <h2>Liste des logements</h2>
                 <Button value={'add'} text="Ajouter un logement" className="button__add" onClick={e => openModal(e)} />
             </div>
-            <ModalCustom
-                modalIsOpen={modalIsOpen}
-                setModalIsOpen={setModalIsOpen}
+            <ModalForm
+                isOpen={modalIsOpen}
                 closeModal={closeModal}
-                modalType={modalType}
                 modalData={modalData}
+                modalType={modalType}
                 pictures={pictures}
                 equipments={equipments}
                 tags={tags}
@@ -165,7 +163,7 @@ const Dashboard = () => {
                 handleDelete={handleDelete}
                 onChange={handleChange}
                 sendForm={sendForm}
-            />            
+            />
             {
                 isLoaded && data &&
                 <Cards accomodations={data} isAdmin onClick={e => openModal(e)} />

@@ -1,43 +1,27 @@
-import Modal from 'react-modal'
-import Button from './Button'
+import { useState, useEffect } from "react";
+import Button from "./Button";
 
+const ModalForm = ({ isOpen, closeModal, modalType, modalData, pictures, tags, equipments, onChange, handleAdd, handleDelete, sendForm }) => {
 
-const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictures, equipments, tags, closeModal, handleAdd, handleDelete, onChange, sendForm }) => {
-
-    const customStyles = {
-        content: {
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-
-        },
-        form: {
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        formRow: {
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-        }
+    if (!isOpen) {
+        return null;
     }
-
     return (
-        <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} className="modal" style={customStyles}>
-            {modalType === 'add' && (
+        <aside id="modal" className="modal" aria-hidden="true" role="dialog" aria-modal="false" >
+            <div className="modal-wrapper">
+                <Button onClick={e => closeModal(e)} text={'fermer'} />
+                {modalType === 'add' && (
                 <>
                     <h2>Ajouter un logement</h2>
-                    <form style={customStyles.form}>
-                        <label htmlFor="title">Titre</label>
-                        <input type="text" name="title" id="title" onChange={e => onChange(e)} />
-                        <label>Cover</label>
-                        <input type="text" name="cover" id="cover" onChange={e => onChange(e)} />
-                        <label htmlFor="pictures">Photos</label>
-                        <div style={customStyles.formRow}>
+                    <form>
+                        <div className="formRow">
+                            <label htmlFor="title">Titre</label>
+                            <input type="text" name="title" id="title" onChange={e => onChange(e)} />
+                            <label>Cover</label>
+                            <input type="text" name="cover" id="cover" onChange={e => onChange(e)} />
+                        </div>
+                        <div className='formRow'>
+                            <label htmlFor="pictures">Photos</label>
                             <input type="text" name="pictures" id="pictures" />
                             <Button text="+" value={'picture'} onClick={e => handleAdd(e)} />
                         </div>
@@ -45,7 +29,7 @@ const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictur
                             pictures.length > 0 &&
                             pictures.map((picture, index) => {
                                 return (
-                                    <div key={index} style={customStyles.formRow}>
+                                    <div key={index} className='formRow'>
                                         <input type="text" name="pictures" id={`picture${index}`} value={picture} readOnly />
                                         <Button text="-" value={'picture'} onClick={e => handleDelete(e, index)} />
                                     </div>
@@ -64,7 +48,7 @@ const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictur
                         <label htmlFor="location">Localisation</label>
                         <input type="text" name="location" id="location" onChange={e => onChange(e)} />
                         <label htmlFor="equipments">Équipements</label>
-                        <div style={customStyles.formRow}>
+                        <div className='formRow'>
                             <input type="text" name="equipments" id="equipments" />
                             <Button text="+" value={'equipment'} onClick={e => handleAdd(e)} />
                         </div>
@@ -72,7 +56,7 @@ const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictur
                             equipments.length > 0 &&
                             equipments.map((equipment, index) => {
                                 return (
-                                    <div key={index} style={customStyles.formRow}>
+                                    <div key={index} className='formRow'>
                                         <input type="text" name="equipments" id={`equipment${index}`} value={equipment} readOnly />
                                         <Button text="-" value={'equipment'} onClick={e => handleDelete(e, index)} />
                                     </div>
@@ -80,7 +64,7 @@ const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictur
                             })
                         }
                         <label htmlFor="tags">Tags</label>
-                        <div style={customStyles.formRow}>
+                        <div className='formRow'>
                             <input type="text" name="tags" id="tags" />
                             <Button text="+" value={'tag'} onClick={e => handleAdd(e)} />
                         </div>
@@ -88,7 +72,7 @@ const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictur
                             tags.length > 0 &&
                             tags.map((tag, index) => {
                                 return (
-                                    <div key={index} style={customStyles.formRow}>
+                                    <div key={index} className='formRow'>
                                         <input type="text" name="tags" id={`tag${index}`} value={tag} readOnly />
                                         <Button text="-" value={'tag'} onClick={e => handleDelete(e, index)} />
                                     </div>
@@ -107,13 +91,13 @@ const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictur
                         modalData && pictures.length && equipments.length && tags.length ? (
                             <>
 
-                                <form style={customStyles.form}>
+                                <form>
                                     <label htmlFor="title">Titre</label>
                                     <input type="text" name="title" id="title" onChange={e => onChange(e)} defaultValue={modalData.title} />
                                     <label>Cover</label>
                                     <input type="text" name="cover" id="cover" onChange={e => onChange(e)} defaultValue={modalData.cover} />
                                     <label htmlFor="pictures">Photos</label>
-                                    <div style={customStyles.formRow}>
+                                    <div className='formRow'>
                                         <input type="text" name="pictures" id="pictures" />
                                         <Button text="+" value={'picture'} onClick={e => handleAdd(e)} />
                                     </div>
@@ -121,7 +105,7 @@ const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictur
                                         pictures && pictures.length > 0 &&
                                         pictures.map((picture, index) => {
                                             return (
-                                                <div key={index} style={customStyles.formRow}>
+                                                <div key={index} className='formRow'>
                                                     <input type="text" name="pictures" id={`picture${index}`} value={picture} readOnly />
                                                     <Button text="-" value={'picture'} onClick={e => handleDelete(e, index)} />
                                                 </div>
@@ -140,7 +124,7 @@ const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictur
                                     <label htmlFor="location">Localisation</label>
                                     <input type="text" name="location" id="location" onChange={e => onChange(e)} defaultValue={modalData.location} />
                                     <label htmlFor="equipments">Équipements</label>
-                                    <div style={customStyles.formRow}>
+                                    <div className='formRow'>
                                         <input type="text" name="equipments" id="equipments" />
                                         <Button text="+" value={'equipment'} onClick={e => handleAdd(e)} />
                                     </div>
@@ -148,7 +132,7 @@ const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictur
                                         equipments.length > 0 &&
                                         equipments.map((equipment, index) => {
                                             return (
-                                                <div key={index} style={customStyles.formRow}>
+                                                <div key={index} className='formRow'>
                                                     <input type="text" name="equipments" id={`equipment${index}`} value={equipment} readOnly />
                                                     <Button text="-" value={'equipment'} onClick={e => handleDelete(e, index)} />
                                                 </div>
@@ -156,7 +140,7 @@ const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictur
                                         })
                                     }
                                     <label htmlFor="tags">Tags</label>
-                                    <div style={customStyles.formRow}>
+                                    <div className='formRow'>
                                         <input type="text" name="tags" id="tags" />
                                         <Button text="+" value={'tag'} onClick={e => handleAdd(e)} />
                                     </div>
@@ -164,7 +148,7 @@ const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictur
                                         tags.length > 0 &&
                                         tags.map((tag, index) => {
                                             return (
-                                                <div key={index} style={customStyles.formRow}>
+                                                <div key={index} className='formRow'>
                                                     <input type="text" name="tags" id={`tag${index}`} value={tag} readOnly />
                                                     <Button text="-" value={'tag'} onClick={e => handleDelete(e, index)} />
                                                 </div>
@@ -175,7 +159,7 @@ const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictur
                                     <Button text="Annuler" onClick={e => closeModal(e)} />
                                 </form>
                             </>
-                        ): <p>Chargement...</p>
+                        ) : <p>Chargement...</p>
 
                     }
 
@@ -189,8 +173,8 @@ const ModalCustom = ({ modalIsOpen, setModalIsOpen, modalType, modalData, pictur
                     <Button text="Annuler" onClick={e => closeModal(e)} />
                 </>
             )}
-        </Modal>
+            </div>
+        </aside>
     )
 }
-
-export default ModalCustom
+export default ModalForm;

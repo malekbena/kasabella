@@ -1,0 +1,33 @@
+.modal {
+    position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+.modal-wrapper {
+	overflow: auto;
+	max-width: 630px;
+	max-height: 730px;
+	padding: 20px;
+	background-color: $secondary-color;
+	border-radius: 10px;
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        
+        .formRow {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
