@@ -93,7 +93,7 @@ const ModalForm = ({ isOpen, closeModal, modalType, modalData, pictures, tags, h
                     <>
                         <h2>Modifier un logement</h2>
                         {
-                            modalData && pictures.length && equipments.length && tags.length ? (
+                            modalData && pictures.length && equipments.length && tags.length && host ? (
                                 <>
 
                                     <form>

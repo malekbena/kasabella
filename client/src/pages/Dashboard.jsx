@@ -130,7 +130,7 @@ const Dashboard = () => {
 
     const handleChange = (e) => {
         e.preventDefault()
-        if (e.target.name === 'hostName') {
+        if (e.target.name === 'hostname') {
             setHost({ ...host, name: e.target.value })
         }
         if (e.target.name === 'hostPicture') {
@@ -145,7 +145,7 @@ const Dashboard = () => {
         const token = localStorage.getItem('token')
         if (modalType === 'delete') {
             postAccomodation(token, { id }, modalType)
-            return
+            setMessage('Logement supprimé')
         }
         let body = {
             "title": modalData.title,
@@ -163,11 +163,11 @@ const Dashboard = () => {
         }
         if (modalType === 'edit') {
             postAccomodation(token, body, modalType, id)
+            setMessage('Logement modifié')
 
         }
         if (modalType === 'add') {
-            // postAccomodation(token, body, modalType)
-            console.log(modalData)
+            postAccomodation(token, body, modalType)
             setMessage('Logement ajouté')
         }
         closeModal(e)
