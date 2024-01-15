@@ -3,7 +3,7 @@ const router = express.Router()
 const User = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-require('dotenv').config({ path: '.env' })
+require('dotenv').config({ path: '.env.local' })
 
 const privateKey = process.env.PRIVATE_KEY
 
