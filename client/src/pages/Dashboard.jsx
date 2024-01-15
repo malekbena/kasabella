@@ -15,7 +15,9 @@ const Dashboard = () => {
     const [pictures, setPictures] = useState([])
     const [equipments, setEquipments] = useState([])
     const [tags, setTags] = useState([])
+    const [host, setHost] = useState({})
     const [id, setId] = useState('')
+    const [message, setMessage] = useState('')
 
     const { user } = useContext(AuthContext)
 
@@ -38,13 +40,22 @@ const Dashboard = () => {
     useEffect(() => {
         const handleEscapeKey = (event) => {
             if (event.code === 'Escape') {
-                setModalIsOpen(false)
+                closeModal(event)
             }
         }
 
         document.addEventListener('keydown', handleEscapeKey)
         return () => document.removeEventListener('keydown', handleEscapeKey)
     }, [])
+
+    useEffect(() => {
+        if (message) {
+            setTimeout(() => {
+                setMessage('')
+            }, 3000)
+        }
+    }, [message])
+
     const openModal = (e) => {
         e.preventDefault()
         setModalType(e.target.value)
@@ -53,6 +64,7 @@ const Dashboard = () => {
             setPictures([])
             setEquipments([])
             setTags([])
+            setHost({})
             setModalIsOpen(true)
         }
         if (e.target.value === 'edit') {
@@ -62,6 +74,7 @@ const Dashboard = () => {
                     setPictures(res.pictures)
                     setEquipments(res.equipments)
                     setTags(res.tags)
+                    setHost(res.host)
                     setId(res._id)
                     setModalIsOpen(true)
                 })
@@ -117,7 +130,14 @@ const Dashboard = () => {
 
     const handleChange = (e) => {
         e.preventDefault()
-        setModalData({ ...modalData, [e.target.name]: e.target.value })
+        if (e.target.name === 'hostName') {
+            setHost({ ...host, name: e.target.value })
+        }
+        if (e.target.name === 'hostPicture') {
+            setHost({ ...host, picture: e.target.value })
+        } else {
+            setModalData({ ...modalData, [e.target.name]: e.target.value })
+        }
     }
 
     const sendForm = (e) => {
@@ -125,7 +145,6 @@ const Dashboard = () => {
         const token = localStorage.getItem('token')
         if (modalType === 'delete') {
             postAccomodation(token, { id }, modalType)
-            setModalIsOpen(false)
             return
         }
         let body = {
@@ -134,8 +153,8 @@ const Dashboard = () => {
             "description": modalData.description,
             "location": modalData.location,
             "host": {
-                "name": modalData.host.name,
-                "picture": modalData.host.picture
+                "name": host.name,
+                "picture": host.picture
             },
             "rating": modalData.rating,
             "equipments": equipments,
@@ -144,13 +163,14 @@ const Dashboard = () => {
         }
         if (modalType === 'edit') {
             postAccomodation(token, body, modalType, id)
-            
 
         }
         if (modalType === 'add') {
-            postAccomodation(token, body, modalType)
+            // postAccomodation(token, body, modalType)
+            console.log(modalData)
+            setMessage('Logement ajouté')
         }
-        setModalIsOpen(false)
+        closeModal(e)
     }
 
     return (
@@ -159,6 +179,10 @@ const Dashboard = () => {
             <p>Bonjour {user.username}</p>
             <div className="dashboard_titles">
                 <h2>Liste des logements</h2>
+                {
+                    message &&
+                    <p className="dashboard__message">{message}</p>
+                }
                 <Button value={'add'} text="Ajouter un logement" className="button-hover" onClick={e => openModal(e)} />
             </div>
             {
@@ -170,6 +194,7 @@ const Dashboard = () => {
                     pictures={pictures}
                     equipments={equipments}
                     tags={tags}
+                    host={host}
                     handleAdd={handleAdd}
                     handleDelete={handleDelete}
                     onChange={handleChange}

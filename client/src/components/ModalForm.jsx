@@ -1,6 +1,6 @@
 import Button from "./Button";
 
-const ModalForm = ({ isOpen, closeModal, modalType, modalData, pictures, tags, equipments, onChange, handleAdd, handleDelete, sendForm }) => {
+const ModalForm = ({ isOpen, closeModal, modalType, modalData, pictures, tags, host, equipments, onChange, handleAdd, handleDelete, sendForm }) => {
 
     if (!isOpen) {
         return null;
@@ -124,9 +124,9 @@ const ModalForm = ({ isOpen, closeModal, modalType, modalData, pictures, tags, e
                                         <label htmlFor="description">Description</label>
                                         <textarea name="description" id="description" cols="30" rows="10" onChange={e => onChange(e)} value={modalData.description}></textarea>
                                         <label htmlFor="hostname">Nom de l'hôte</label>
-                                        <input type="text" name="hostname" id="hostname" onChange={e => onChange(e)} value={modalData.host.name} />
+                                        <input type="text" name="hostname" id="hostname" onChange={e => onChange(e)} value={host.name} />
                                         <label htmlFor="hostPicture">Photo de l'hôte</label>
-                                        <input type="text" name="hostPicture" id="hostPicture" onChange={e => onChange(e)} value={modalData.host.picture} />
+                                        <input type="text" name="hostPicture" id="hostPicture" onChange={e => onChange(e)} value={host.picture} />
                                         <label htmlFor="rating">Note</label>
                                         <input type="number" name="rating" id="rating" min={0} max={5} onChange={e => onChange(e)} value={modalData.rating} />
                                         <label htmlFor="location">Localisation</label>

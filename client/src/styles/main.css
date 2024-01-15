@@ -849,6 +849,11 @@ footer p {
   flex-direction: row;
   justify-content: space-between;
 }
+.dashboard__message {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FF6060;
+}
 
 html, body, * {
   margin: 0;
