@@ -1,7 +1,9 @@
 import axios from 'axios'
 
+const api = process.env.REACT_APP_API_URL
+
 export const getData = async (url) => {
-    const res = await axios.get(`http://localhost:9000${url}`)
+    const res = await axios.get(`${api}${url}`)
     const data = res.data
     return data
 }
@@ -17,7 +19,7 @@ export const postAccomodation = async (token, body, type, id) => {
         "Content-Type": 'application/json'
     }
     if (type === 'add') {
-        axios.post(`http://localhost:9000/accomodation`, body, { headers: headers })
+        axios.post(`${api}/accomodation`, body, { headers: headers })
             .then(res => {
                 return res.data
             })
@@ -26,7 +28,7 @@ export const postAccomodation = async (token, body, type, id) => {
             })
     }
     if (type === 'edit') {
-        axios.patch(`http://localhost:9000/accomodation/${id}`, body, { headers: headers })
+        axios.patch(`${api}/accomodation/${id}`, body, { headers: headers })
             .then(res => {
                 return res.data
             })
@@ -35,7 +37,7 @@ export const postAccomodation = async (token, body, type, id) => {
             })
     }
     if (type === 'delete') {
-        axios.delete(`http://localhost:9000/accomodation/${body.id}`, { headers: headers })
+        axios.delete(`${api}/accomodation/${body.id}`, { headers: headers })
             .then(res => {
                 return res.data
             })
