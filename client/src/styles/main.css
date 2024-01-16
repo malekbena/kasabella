@@ -564,6 +564,12 @@ footer p {
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 1000;
 }
+.modal__message {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FF6060;
+  text-align: center;
+}
 
 .modal-wrapper {
   overflow: auto;
@@ -848,11 +854,6 @@ footer p {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-.dashboard__message {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #FF6060;
 }
 
 .login h1 {

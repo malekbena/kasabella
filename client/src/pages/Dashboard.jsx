@@ -11,11 +11,20 @@ const Dashboard = () => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [modalType, setModalType] = useState('')
-    const [modalData, setModalData] = useState({})
+    const [modalData, setModalData] = useState({
+        title: '',
+        cover: '',
+        description: '',
+        location: '',
+        rating: 5,
+    })
     const [pictures, setPictures] = useState([])
     const [equipments, setEquipments] = useState([])
     const [tags, setTags] = useState([])
-    const [host, setHost] = useState({})
+    const [host, setHost] = useState({
+        name: '',
+        picture: '',
+    })
     const [id, setId] = useState('')
     const [message, setMessage] = useState('')
 
@@ -51,6 +60,7 @@ const Dashboard = () => {
     useEffect(() => {
         if (message) {
             setTimeout(() => {
+                setModalIsOpen(false)
                 setMessage('')
             }, 3000)
         }
@@ -60,11 +70,20 @@ const Dashboard = () => {
         e.preventDefault()
         setModalType(e.target.value)
         if (e.target.value === 'add') {
-            setModalData({})
+            setModalData({
+                title: '',
+                cover: '',
+                description: '',
+                location: '',
+                rating: 5,
+            })
             setPictures([])
             setEquipments([])
             setTags([])
-            setHost({})
+            setHost({
+                name: '',
+                picture: '',
+            })
             setModalIsOpen(true)
         }
         if (e.target.value === 'edit') {
@@ -164,13 +183,11 @@ const Dashboard = () => {
         if (modalType === 'edit') {
             postAccomodation(token, body, modalType, id)
             setMessage('Logement modifié')
-
         }
         if (modalType === 'add') {
             postAccomodation(token, body, modalType)
             setMessage('Logement ajouté')
         }
-        closeModal(e)
     }
 
     return (
@@ -179,10 +196,6 @@ const Dashboard = () => {
             <p>Bonjour {user.username}</p>
             <div className="dashboard_titles">
                 <h2>Liste des logements</h2>
-                {
-                    message &&
-                    <p className="dashboard__message">{message}</p>
-                }
                 <Button value={'add'} text="Ajouter un logement" className="button-hover" onClick={e => openModal(e)} />
             </div>
             {
@@ -199,6 +212,7 @@ const Dashboard = () => {
                     handleDelete={handleDelete}
                     onChange={handleChange}
                     sendForm={sendForm}
+                    message={message}
                 />, document.body)}
             {
                 isLoaded && data &&
