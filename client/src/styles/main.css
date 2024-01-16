@@ -855,6 +855,32 @@ footer p {
   color: #FF6060;
 }
 
+.login h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.login form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+.login form label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #FF6060;
+}
+.login form input {
+  width: 50%;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+.login form input:focus {
+  outline: green auto 1px;
+}
+
 html, body, * {
   margin: 0;
   padding: 0;
