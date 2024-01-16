@@ -19,7 +19,8 @@ router.post('/signup', async (req, res) => {
         const hashedPassword = await bcrypt.hash(body.password, salt)
         const user = await User.create({
             username: body.username,
-            password: hashedPassword
+            password: hashedPassword,
+            isAdmin: body.isAdmin
         })
         res.status(200).json({ user })
     } catch (error) {
@@ -40,9 +41,10 @@ router.post('/login', async (req, res) => {
     }
     const accessToken = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: "30m" })
     const refreshToken = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: '7d' })
-    res.status(200).json({id: user._id ,username: user.username, token: accessToken, refreshToken })
+    res.status(200).json({id: user._id ,username: user.username, token: accessToken, refreshToken, isAdmin: user.isAdmin })
 })
 
+//refresh token
 router.post('/refresh', async (req, res) => {
     const token = req.body.refreshToken
     jwt.verify(token, privateKey, { algorithms: ['RS256'] }, (err, decoded) => {
@@ -57,6 +59,20 @@ router.post('/refresh', async (req, res) => {
         const refreshToken = jwt.sign({ user: decoded.user }, privateKey, { algorithm: 'RS256', expiresIn: '7d' })
         res.status(200).json({ accessToken, refreshToken })
     })
+})
+
+//delete user
+router.delete('/user/:id', async (req, res) => {
+    try {
+        const { id } = req.params
+        const user = await User.findByIdAndDelete(id)
+        if (!user) {
+            return res.status(404).json({ message: `Cannot find any user with ID ${id}` })
+        }
+        res.status(200).json({ user })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
 })
 
 module.exports = router

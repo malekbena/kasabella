@@ -50,7 +50,6 @@ router.patch('/accomodation/:id',
             res.status(200).json({ updatedAccomodation })
         } catch (error) {
             res.status(500).json({ message: error.message })
-
         }
     })
 //delete
