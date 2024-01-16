@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('refreshToken', res.data.refreshToken)
             setIsLogged(true)
-            setUser({ username: res.data.username, id: res.data.id })
+            setUser({ username: res.data.username, id: res.data.id, isAdmin: res.data.isAdmin })
         })
     }
 

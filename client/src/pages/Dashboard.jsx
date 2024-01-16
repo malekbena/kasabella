@@ -163,8 +163,10 @@ const Dashboard = () => {
         e.preventDefault()
         const token = localStorage.getItem('token')
         if (modalType === 'delete') {
-            postAccomodation(token, { id }, modalType)
             setMessage('Logement supprimé')
+            if (user.isAdmin) {
+                postAccomodation(token, { id }, modalType)
+            }
         }
         let body = {
             "title": modalData.title,
@@ -181,12 +183,16 @@ const Dashboard = () => {
             "pictures": pictures
         }
         if (modalType === 'edit') {
-            postAccomodation(token, body, modalType, id)
             setMessage('Logement modifié')
+            if (user.isAdmin) {
+                postAccomodation(token, body, modalType, id)
+            }
         }
         if (modalType === 'add') {
-            postAccomodation(token, body, modalType)
             setMessage('Logement ajouté')
+            if (user.isAdmin) {
+                postAccomodation(token, body, modalType)
+            }
         }
     }
 
