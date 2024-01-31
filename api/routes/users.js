@@ -31,7 +31,7 @@ router.post('/signup', async (req, res) => {
 //login
 router.post('/login', async (req, res) => {
     const body = req.body
-    const user = await User.findOne({ username: body.username })
+    const user = await User.findOne({ username: body.username }, '+password')
     if (!user) {
         return res.status(400).json({ message: 'Username or password incorrect' })
     }
@@ -39,6 +39,7 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
         return res.status(400).json({ message: 'Username or password incorrect' })
     }
+    delete user.password
     const accessToken = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: "30m" })
     const refreshToken = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: '7d' })
     res.status(200).json({id: user._id ,username: user.username, token: accessToken, refreshToken, isAdmin: user.isAdmin })
