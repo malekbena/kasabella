@@ -22,6 +22,7 @@ router.post('/signup', async (req, res) => {
             password: hashedPassword,
             isAdmin: body.isAdmin
         })
+        delete user.password
         res.status(200).json({ user })
     } catch (error) {
         res.status(500).json({ message: error.message })
