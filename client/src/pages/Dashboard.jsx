@@ -32,6 +32,7 @@ const Dashboard = () => {
     const { user } = useContext(AuthContext)
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         getData('/accomodations').then((data) => {
             setData(data.accomodations)
             setIsLoaded(true)
