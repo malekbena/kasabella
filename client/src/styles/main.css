@@ -938,6 +938,9 @@ footer p {
   justify-content: space-between;
 }
 
+.login {
+  min-height: 50vh;
+}
 .login h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
