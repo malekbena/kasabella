@@ -4,6 +4,7 @@ import Carousel from "../components/Carousel";
 import Tag from "../components/Tag";
 import Rating from "../components/Rating";
 import Collapse from "../components/Collapse";
+import Loader from "../components/Loader";
 import { getData } from "../util"
 
 const Accomodation = () => {
@@ -28,8 +29,9 @@ const Accomodation = () => {
   return (
     <>
       {
-        isLoaded &&
-        <div className="accomodation">
+        isLoaded ? (
+
+          <div className="accomodation">
           <Carousel data={accomodation.pictures} />
           <div className="accomodation_box">
             <div className="accomodation_block1">
@@ -60,6 +62,8 @@ const Accomodation = () => {
             <Collapse title="Equipements" list={accomodation.equipments} className={'collapse_headerAccomodation'} />
           </div>
         </div>
+        ) :
+          <Loader text="Un instant s'il vous plaît" />
       }
     </>
   );

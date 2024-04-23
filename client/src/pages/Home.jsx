@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Banner from "../components/Banner"
 import Cards from "../components/Cards";
 import { getData } from "../util";
+import Loader from "../components/Loader";
 
 import homeBanner from "../assets/beach.png"
 
@@ -18,10 +19,13 @@ const Home = () => {
 
   return (
     <>
-      <Banner img={homeBanner} txt={"Chez vous, partout et ailleurs"} />
+      <Banner img={homeBanner} txt="Chez vous, partout et ailleurs" />
       {
-        isLoaded && data &&
-        <Cards accomodations={data} />
+        isLoaded && data ? (
+          <Cards accomodations={data} />
+        ): (
+          <Loader text="Un instant, nous cherchons les meilleurs offres pour vous..." />
+        )
       }
     </>
   );

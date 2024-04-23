@@ -3,6 +3,7 @@ import { getData, getAccomodation, postAccomodation } from "../util"
 import Cards from "../components/Cards"
 import Button from "../components/Button"
 import ModalForm from "../components/ModalForm"
+import Loader from "../components/Loader"
 import { AuthContext } from "../context/AuthContext"
 import { createPortal } from "react-dom"
 
@@ -221,8 +222,10 @@ const Dashboard = () => {
                     message={message}
                 />, document.body)}
             {
-                isLoaded && data &&
-                <Cards accomodations={data} isAdmin onClick={e => openModal(e)} />
+                isLoaded && data ? (
+                    <Cards accomodations={data} isAdmin onClick={e => openModal(e)} />
+                ) :
+                    <Loader text="Un instant s'il vous plaît" />
             }
         </div>
     )
